@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.encoding import smart_unicode
 from django.template.defaultfilters import slugify
 
 # Create your models here.
@@ -13,7 +12,7 @@ class Project(models.Model):
 
 
 	def __str__(self):
-		return smart_unicode(self.title)
+		return self.title
 
 	def save(self):
 		super(Project, self).save()
