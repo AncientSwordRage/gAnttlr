@@ -1,7 +1,11 @@
 gAnttlr Stories:
 
-1. I want to create a Gantt chart so that I can schedule a project
-
+1. I want to create a Gantt chart so that I can schedule a project made up of task
+	a) the Gantt model needs to have a create method
+	b) the Gantt model needs to have tasks
+	b 1) Tasks need a start and end time
+	b 2) Tasks need a name and description
+	b 3) Tasks need to know about their dependencies (i.e. what they depend on)
 2. I want to view my friends Gantt charts so that I can see what they are doing
 
 3. I want to combine Gantt charts so that I can see how my schedule is effected. (e.g. by train times).
