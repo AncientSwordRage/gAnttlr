@@ -1,0 +1,11 @@
+gAnttlr Stories:
+
+1. I want to create a Gantt chart so that I can schedule a project
+
+2. I want to view my friends Gantt charts so that I can see what they are doing
+
+3. I want to combine Gantt charts so that I can see how my schedule is effected. (e.g. by train times).
+
+4. I want to use gAnttlr to help estimate tasks (length etc).
+
+5. I want to use gAnttlr to bake a cake.
