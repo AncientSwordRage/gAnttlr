@@ -1,0 +1,40 @@
+{% load humanize %}
+{% load staticfiles %}
+{% load toastmessage %}
+
+<html>
+	<head>
+	<!-- external includes -->
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+	<!-- local includes -->
+		<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+		<link rel="stylesheet" href="{% static 'css/site.css' %}">
+		<title>gAnttlr - Gantt charts</title>
+	</head>
+	<body>
+		{% include 'navbar.html' %}
+		</div>
+		<div class="content container">
+			<div class="row">
+				<div class="col-md-8">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div class="push"></div>
+		<footer id="footer" class="muted footer">
+			<p>
+				gAnttlr logo derived from 'Vectorised' by Yug (Nordisk familjebok (1911), vol.15, p.19 [1]) [Public domain], <a href="http://commons.wikimedia.org/wiki/File%3AKronhjortshornets_utveckling%2C_Nordisk_familjebok.svg">via Wikimedia Commons</a>
+			</p>
+		</footer>
+	</body>
+	{% include 'about.html'%}
+	<link rel="stylesheet" href="{% static 'css/jquery.toastmessage.css' %}"/>
+	<script src="{% static 'js/jquery.toastmessage.js'%}"></script>
+	{% include 'toastmessages_fragment.html' %}
+</html>

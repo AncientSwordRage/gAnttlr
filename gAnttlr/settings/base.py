@@ -10,8 +10,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'gantt_charts', 'templates', 'gantt_charts'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
+                    ]
+DB_LOCATION = os.path.join(BASE_DIR, 'gAnttlr', 'db.sqlite3')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -22,10 +27,25 @@ SECRET_KEY = 'lf=9@m6hwa)v-_yf#$8g9^svv&!z$_e5spv-md&o5(y@m_d7^m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
+
+# import logging
+# if DEBUG:
+#     # will output to your console
+#     logging.basicConfig(
+#         level = logging.DEBUG,
+#         format = '%(asctime)s %(levelname)s %(message)s',
+#     )
 
 # Application definition
 
@@ -36,6 +56,11 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'toastmessage',
+    'lettuce.django',
+    'rest_framework',
+    'django_extensions',
 ]
 
 PROJECT_APPS = [
@@ -65,14 +90,14 @@ WSGI_APPLICATION = 'gAnttlr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': DB_LOCATION,
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 
@@ -87,3 +112,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'

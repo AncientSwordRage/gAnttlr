@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load humanize %}
+{% load staticfiles %}
+{% load task_extras %}
+
+	<div class="project panel panel-default">
+		<div class="panel-heading">
+			<a href="/project/{{project.id}}/{{project.slug}}" 
+			title="Created {{project.created_date|naturaltime}}">{{project.title}}</a>
+		</div>
+		<div class="panel-body">
+			<ul class = "list-group">
+				{% for task in project.tasks.all %}
+				{% if task|is_root_task %}
+				<li  class="list-group-item {%if task.completed %}muted{% endif%}">
+					<p title="{{task.sub_tasks}}" >{{task.title}}
+						<a href="/project/{{project.id}}/{{task.id}}/edit">
+							<span class="glyphicon glyphicon-pencil" title="Edit Task" aria-hidden="true"></span>
+						</a>
+					</p>
+					<p>{{task.description}}</p>
+					<ul class="list-group substasks">
+					{% for sub_task in task.sub_tasks %}
+					{% if sub_task|is_root_task:task  %}
+						<li class="list-group-item {%if task.completed %}muted{% endif%}">
+							<p title="{{sub_task.sub_tasks}}" >{{sub_task.title}}
+								<a href="/project/{{project.id}}/{{sub_task.id}}/edit">
+									<span class="glyphicon glyphicon-pencil" title="Edit Task" aria-hidden="true"></span>
+								</a>
+							</p>
+							<p>{{sub_task.description}}</p>
+						</li>
+					{% endif %}
+					{% empty %}
+					<li> No Sub-tasks</li>
+					{% endfor %}
+					</ul>
+				</li>
+				{% endif %}
+				{% empty %}
+				<li  class="list-group-item">No tasks in this project</li>
+				{% endfor %}
+			</ul>
+			<div>
+				<a href="/project/{{project.id}}/new">
+					<span class="glyphicon glyphicon-plus" title="Add Task" aria-hidden="true"></span>
+				</a>
+			</div>
+		</div>
+	</div>	
+{% endblock content %}

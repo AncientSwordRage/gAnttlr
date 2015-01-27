@@ -1,0 +1,45 @@
+
+{% extends 'base.html'%}
+{% block content %}
+{% load humanize %}
+{% load staticfiles %}
+	<div class="local jumbotron">
+		<p>Hello, {{user}}!</p>
+		<p>Welcome to gAnttlr, your friendly neighbourhood project planning webApp</p>
+	</div>
+	{% for project in projects|slice:":3"%}
+		<div class="project panel panel-default">
+			<div class ="panel-heading">
+				<a href="/project/{{project.id}}/{{project.slug}}" 
+				title="Created {{project.created_date|naturaltime}}">{{project.title}}</a>
+				<a href="/project/{{project.id}}/edit">
+					<i class="glyphicon glyphicon-pencil" title="Edit Project" aria-hidden="true"></i>
+				</a>
+				<a href="/project/{{project.id}}/new">
+					<span class="glyphicon glyphicon-plus" title="Add tasks" aria-hidden="true"></span>
+				</a>
+				<a href="/project/{{project.id}}/{{project.slug}}"> 
+					<span class="glyphicon glyphicon-chevron-right" title="See {{project.tasks.all.count|add:"-3"}} more tasks" aria-hidden="true"></span>
+				</a>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+					{% for task in project.tasks.all|slice:":3" %}
+					<li  class="list-group-item">{{task.title}}</li>
+					{% empty %}
+					<li  class="list-group-item">No tasks in this project</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% empty %}
+	<p>No projects found</p>
+	<p>Create new <a href="/project/new">project</a>?</p>
+	{% endfor %}
+	{% if projects.count > 3 %}
+		<div>
+			See all projects?
+		</div>
+	{% endif %}
+
+{% endblock content %}
